@@ -1,0 +1,17 @@
+var express		= require("express");
+var app			= express();
+var http		= require("http").Server(app);
+var engine		= require("ejs-locals");
+var fs			= require("fs");
+
+app.get('/',function(req, res){
+	res.send("hello");
+})
+
+app.set("views",__dirname+"/views");
+app.engine('ejs', engine);
+app.set("view engine", "ejs");
+
+http.listen(7000,function(request,response){
+	console.log("welcome");
+})

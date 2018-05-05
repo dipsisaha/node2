@@ -1,0 +1,19 @@
+<html>
+<body>
+	<table>
+	<tr><td colspan="3"><a href="/add">Add</a></td></tr>
+		<tr>
+		  <td>Id</td>
+		  <td>Name</td>
+		  <td>Links</td>
+		</tr>
+		<% for (var i in data) { %>
+		<tr>
+		  <td><%= data[i].Id%></td>
+		  <td><%= data[i].sname%></td>
+		  <td><a href="/edit/<%= data[i].Id%>">Edit</a>&nbsp;&nbsp;<a href="/delete/<%= data[i].Id%>">Delete</a></td>
+		</tr>
+		<% } %>
+	</table>
+</body>
+</html>
