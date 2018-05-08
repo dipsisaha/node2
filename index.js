@@ -48,7 +48,7 @@ var upload = multer({
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "password",
   database : 'student'
 });
 
@@ -114,45 +114,44 @@ app.get('/edit/:id',function(req,res){
 app.post('/editAction',upload,function(req,res){
 	var sname = req.body.sname;
 	var id = req.body.Id;
-	var img;
+
+	var img = '';
 	
 	if(sname == "") {
 		process.stdout.write("please enter student name");
 	} else {
 	
-					  
+		var sql = "UPDATE persons SET sname ='"+sname+"' ";					  
 		if(req.files.length > 0) {
 			img   	= req.files[0].filename;
 			
-			upload(req, res, function(err) {
-					//res.end('File is uploaded')
-					if (err) throw err;
-					console.log("image uploaded successfully");
 			
-				})
-		} else {
-			var sql = "SELECT img FROM persons WHERE Id='"+id+"'";
+		} 
+		upload(req, res, function(err) {
+			//res.end('File is uploaded')
+			if (err) throw err;
+			console.log("image uploaded successfully");
+			if(img != ''){
+				sql += ", img ='"+img+"' ";
+			}
+			sql += " WHERE Id='"+id+"'";
+			
 			con.query(sql, function (err, result) {
-				if (err) throw err;
-				img = result[0]['img'];
-				
-				console.log("--------------------")
-				console.log(result[0])
-				console.log(result[0]['img'])
-			})
-		}
-		
-	}	
-	
-	console.log("+++++++++++"+img)
-	
-		var sql = "UPDATE persons SET sname ='"+sname+"', img ='"+img+"' WHERE Id='"+id+"'";
-						
-			con1.query(sql, function (err, result) {
 				if (err) throw err;
 				console.log("1 record inserted");
 				res.redirect('/');
 			 })
+	
+		})
+		
+
+		
+		
+	}	
+	
+	//console.log("+++++++++++"+img)
+		
+		
 		
 	
 })

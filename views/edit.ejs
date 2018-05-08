@@ -4,14 +4,14 @@
 			<table>
 				<tr>
 					<td> Student Name : </td>
-					<td><input type="text" name="sname" value="<%= data[0].sname%>"/><input type="hidden" value="<%= data[0].Id%>" name="Id"/></td>
+					<td><input type="text" name="sname" value="<%= data[0].sname%>"/>
+					<input type="hidden" value="<%= data[0].Id%>" name="Id"/></td>
 				</tr>
 				<tr>
 					<td> Image : </td>
 					<td><td> <input type="file" name="img" />
 					<br>
 					<img src="<%= "/"+data[0].img%>" width="100" height="100"/>
-					<input type="hidden" value="<%= data[0].Id%>" name="Id"/></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" name="submit" value="Submit"/></td>
